@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/9andresc/gqlhn-client#readme",
   "dependencies": {
+    "@emotion/core": "10.0.10",
+    "@emotion/styled": "10.0.10",
     "next": "8.0.4",
     "react": "16.8.6",
     "react-dom": "16.8.6"
@@ -33,6 +35,7 @@
     "@typescript-eslint/parser": "1.6.0",
     "@zeit/next-bundle-analyzer": "0.1.2",
     "@zeit/next-typescript": "1.1.1",
+    "babel-plugin-emotion": "10.0.9",
     "eslint": "5.16.0",
     "eslint-config-prettier": "4.1.0",
     "eslint-plugin-prettier": "3.0.1",
