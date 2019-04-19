@@ -1,4 +1,11 @@
 module.exports = {
   presets: ['next/babel', '@zeit/next-typescript/babel'],
-  plugins: ['emotion'],
+  env: {
+    production: {
+      plugins: ['emotion'],
+    },
+    development: {
+      plugins: [['emotion', { sourceMap: true }]],
+    },
+  },
 };

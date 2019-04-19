@@ -1,5 +1,9 @@
+const path = require('path');
+const Dotenv = require('dotenv-webpack');
 const withBundleAnalyzer = require('@zeit/next-bundle-analyzer');
 const withTypescript = require('@zeit/next-typescript');
+
+require('dotenv').config();
 
 module.exports = withTypescript(
   withBundleAnalyzer({
@@ -16,6 +20,16 @@ module.exports = withTypescript(
       },
     },
     webpack(config) {
+      config.plugins = config.plugins || [];
+
+      config.plugins = [
+        ...config.plugins,
+        new Dotenv({
+          path: path.join(__dirname, '.env'),
+          systemvars: true,
+        }),
+      ];
+
       return config;
     },
   }),
