@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import { useTheme } from '../../utils/theme';
-import { Toggle } from '../Toggle';
+import { Switch } from '../Switch';
 import { Wrapper } from '../Wrapper';
 
 const Container = styled.header(props => ({
@@ -31,7 +31,7 @@ export function Header() {
       <InnerContainer>
         <Logo alt="GQLHN's logo" src="/static/logo.svg" />
 
-        <Toggle
+        <Switch
           aria-label="Switch between light and dark mode"
           isOn={localStorage.getItem('isDark') === 'true'}
           offIconSrc="/static/emoji-sun.svg"

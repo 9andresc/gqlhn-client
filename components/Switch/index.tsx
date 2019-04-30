@@ -66,7 +66,7 @@ type Props = {
   onChange?: (isOn: boolean) => void;
 } & typeof defaultProps;
 
-function Toggle(props: Props) {
+function Switch(props: Props) {
   const [state, setState] = useState({
     isOn: props.isOn,
     isDisabled: props.isDisabled,
@@ -98,6 +98,6 @@ function Toggle(props: Props) {
   );
 }
 
-Toggle.defaultProps = defaultProps;
+Switch.defaultProps = defaultProps;
 
-export { Toggle };
+export { Switch };
