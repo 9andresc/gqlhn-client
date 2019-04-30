@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-import { Button } from '../Button';
 import { useTheme } from '../../utils/theme';
 import { Toggle } from '../Toggle';
 import { Wrapper } from '../Wrapper';
@@ -34,8 +33,9 @@ export function Header() {
 
         <Toggle
           aria-label="Switch between light and dark mode"
-          onIconSrc="/static/emoji-moon.svg"
+          isOn={localStorage.getItem('isDark') === 'true'}
           offIconSrc="/static/emoji-sun.svg"
+          onIconSrc="/static/emoji-moon.svg"
           onChange={() => themeState.toggle()}
         />
       </InnerContainer>
