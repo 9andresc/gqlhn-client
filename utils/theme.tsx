@@ -1,35 +1,62 @@
 import { ThemeProvider as EmotionThemeProvider } from 'emotion-theming';
+import FontFaceObserver from 'fontfaceobserver';
 import React from 'react';
 
 import { tuplify } from './index';
 
-const colors = {
-  primary: '#F78764',
-  primaryDark: '#B46349',
-  primaryLight: '#F9A78E',
+const commonColors = {
+  primaryLightColor: '#D98961',
+  primaryColor: '#D16F3E',
+  primaryDarkColor: '#AC5B33',
+  greyLightColor: '#EBECEC',
+  greyColor: '#292F36',
+  greyDarkColor: '#040505',
+  whiteColor: '#FFFFFF',
+  dangerColor: '#F52F57',
 };
 
-const themes = {
+type Colors = {
+  backgroundColor: string;
+  bodyColor: string;
+  dangerColor: string;
+  greyColor: string;
+  greyDarkColor: string;
+  greyLightColor: string;
+  primaryColor: string;
+  primaryDarkColor: string;
+  primaryLightColor: string;
+  shadowColor: string;
+  whiteColor: string;
+};
+
+type Themes = {
+  dark: Colors;
+  light: Colors;
+};
+
+const themes: Themes = {
   dark: {
-    ...colors,
-    background: '#292F36',
-    text: '#FFFFFF',
+    ...commonColors,
+    backgroundColor: commonColors.greyColor,
+    bodyColor: commonColors.whiteColor,
+    shadowColor: commonColors.greyDarkColor,
   },
   light: {
-    ...colors,
-    background: '#FFFFFF',
-    text: '#292F36',
+    ...commonColors,
+    backgroundColor: commonColors.whiteColor,
+    bodyColor: commonColors.greyColor,
+    shadowColor: commonColors.greyColor,
   },
 };
 
 const defaultContextState = {
   isDark: false,
-  toggle: () => {},
+  toggle() {},
 };
 
 const ThemeContext = React.createContext(defaultContextState);
 
-function useTheme() {
+export function useTheme() {
   return React.useContext(ThemeContext);
 }
 
@@ -51,7 +78,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-function ThemeProvider({ children }: Props) {
+export function ThemeProvider({ children }: Props) {
   const [themeState, setThemeState] = useDarkTheme();
 
   if (!themeState.hasThemeMounted) {
@@ -80,4 +107,21 @@ function ThemeProvider({ children }: Props) {
   );
 }
 
-export { ThemeProvider, useTheme };
+export function loadFonts() {
+  const link = document.createElement('link');
+  link.href = 'https://fonts.googleapis.com/css?family=Rubik:400,700';
+  link.rel = 'stylesheet';
+
+  document.head.appendChild(link);
+
+  const font = new FontFaceObserver('Rubik');
+  font.load().then(() => {
+    document.documentElement.classList.add('font');
+  });
+}
+
+export enum Breakpoints {
+  Tablet = '@media(min-width: 600px)',
+  Desktop = '@media(min-width: 900px)',
+  Widescreen = '@media(min-width: 1200px)',
+}

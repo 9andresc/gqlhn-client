@@ -10,7 +10,6 @@ import initApollo from './initApollo';
 export default function(App: any) {
   function Apollo(props: any) {
     const apolloClient = initApollo(props.apolloState);
-
     return <App {...props} apolloClient={apolloClient} />;
   }
 
@@ -25,12 +24,16 @@ export default function(App: any) {
     }
 
     const apolloClient = initApollo();
-    appProps.apolloClient = apolloClient;
 
     if (!isBrowser()) {
       try {
         await getDataFromTree(
-          <App {...appProps} Component={Component} router={router} />,
+          <App
+            {...appProps}
+            apolloClient={apolloClient}
+            Component={Component}
+            router={router}
+          />,
         );
       } catch (error) {
         console.error('Error while running `getDataFromTree`', error);
