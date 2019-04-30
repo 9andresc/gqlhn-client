@@ -1,7 +1,11 @@
+import gql from 'graphql-tag';
 import React from 'react';
+import { useQuery } from 'react-apollo-hooks';
 import styled from '@emotion/styled';
 
+import { FeedQuery } from '../../generated/FeedQuery';
 import { Link } from '../Link';
+import { Spinner } from '../Spinner';
 
 const Container = styled.article({
   display: 'flex',
@@ -9,22 +13,28 @@ const Container = styled.article({
   flexDirection: 'column',
 });
 
+const feedQuery = gql`
+  query FeedQuery {
+    feed {
+      links {
+        id
+        createdAt
+        description
+        url
+      }
+    }
+  }
+`;
+
 export function LinksList() {
-  const links = [
-    {
-      id: '1',
-      description: 'Prisma turns your database into a GraphQL API 😎',
-      url: 'https://www.prismagraphql.com',
-    },
-    {
-      id: '2',
-      description: 'The best GraphQL client',
-      url: 'https://www.apollographql.com/docs/react/',
-    },
-  ];
+  const { data, loading } = useQuery<FeedQuery>(feedQuery);
+
+  if (loading || !data) return <Spinner />;
+
+  const links = data.feed.links;
 
   return (
-    <Container aria-label="Links' container">
+    <Container>
       {links.map(link => (
         <Link key={link.id} description={link.description} url={link.url} />
       ))}

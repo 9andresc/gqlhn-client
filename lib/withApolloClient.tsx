@@ -1,7 +1,8 @@
 import { AppComponentContext } from 'next/app';
 import Head from 'next/head';
 import React from 'react';
-import { getDataFromTree } from 'react-apollo';
+import { renderToString } from 'react-dom/server';
+import { getMarkupFromTree } from 'react-apollo-hooks';
 
 import { isBrowser } from '../utils';
 
@@ -27,16 +28,19 @@ export default function(App: any) {
 
     if (!isBrowser()) {
       try {
-        await getDataFromTree(
-          <App
-            {...appProps}
-            apolloClient={apolloClient}
-            Component={Component}
-            router={router}
-          />,
-        );
+        await getMarkupFromTree({
+          renderFunction: renderToString,
+          tree: (
+            <App
+              {...appProps}
+              apolloClient={apolloClient}
+              Component={Component}
+              router={router}
+            />
+          ),
+        });
       } catch (error) {
-        console.error('Error while running `getDataFromTree`', error);
+        console.error('Error while running `getMarkupFromTree`', error);
       }
 
       Head.rewind();

@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 import { useTheme } from '../../utils/theme';
 import { Switch } from '../Switch';
-import { Wrapper } from '../Wrapper';
+import { Wrapper as Wrp } from '../Wrapper';
 
 const Container = styled.header(props => ({
   height: '3rem',
@@ -11,7 +11,7 @@ const Container = styled.header(props => ({
   backgroundColor: props.theme.primaryColor,
 }));
 
-const InnerContainer = styled(Wrapper)({
+const Wrapper = styled(Wrp)({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
@@ -28,7 +28,7 @@ export function Header() {
 
   return (
     <Container tabIndex={-1}>
-      <InnerContainer>
+      <Wrapper>
         <Logo alt="GQLHN's logo" src="/static/logo.svg" />
 
         <Switch
@@ -38,7 +38,7 @@ export function Header() {
           onIconSrc="/static/emoji-moon.svg"
           onChange={() => themeState.toggle()}
         />
-      </InnerContainer>
+      </Wrapper>
     </Container>
   );
 }

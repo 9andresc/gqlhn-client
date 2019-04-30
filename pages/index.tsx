@@ -6,7 +6,7 @@ import { Header } from '../components/Header';
 import { H1 } from '../components/Headings';
 import { LinksList } from '../components/LinksList';
 import { SkipToContent } from '../components/SkipToContent';
-import { Wrapper } from '../components/Wrapper';
+import { Wrapper as Wrp } from '../components/Wrapper';
 
 const Container = styled.main(props => ({
   minHeight: 'calc(100vh - 3rem)',
@@ -15,7 +15,7 @@ const Container = styled.main(props => ({
   transition: 'background-color 0.25s',
 }));
 
-const InnerContainer = styled(Wrapper)({
+const Wrapper = styled(Wrp)({
   display: 'flex',
   minHeight: 'inherit',
   alignItems: 'center',
@@ -36,11 +36,11 @@ function Index() {
       <Header />
 
       <Container id="main" tabIndex={-1}>
-        <InnerContainer>
+        <Wrapper>
           <H1 style={{ marginBottom: '1rem' }}>Home</H1>
 
           <LinksList />
-        </InnerContainer>
+        </Wrapper>
       </Container>
     </>
   );
