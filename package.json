@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "description": "A GraphQL client implementation for Hacker News",
   "scripts": {
-    "analyze": "BUNDLE_ANALYZE=both next build",
-    "analyze:server": "BUNDLE_ANALYZE=server next build",
-    "analyze:browser": "BUNDLE_ANALYZE=browser next build",
-    "apollo:generate": "apollo codegen:generate --excludes=node_modules/* --includes=**/*.tsx --localSchemaFile=../gqlhn-server/src/schema.graphql --outputFlat generated --tagName=gql --target=typescript",
-    "build": "next build",
-    "dev": "next",
-    "start": "next start"
+    "analyze": "BUNDLE_ANALYZE=both next build src",
+    "analyze:browser": "BUNDLE_ANALYZE=browser next build src",
+    "analyze:server": "BUNDLE_ANALYZE=server next build src",
+    "apollo:generate": "apollo codegen:generate --excludes=node_modules/* --includes=**/*.tsx --localSchemaFile=../gqlhn-server/src/schema.graphql --outputFlat src/generated --tagName=gql --target=typescript",
+    "build": "next build src",
+    "dev": "next src",
+    "start": "next start src"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,9 @@
   "dependencies": {
     "@emotion/core": "10.0.10",
     "@emotion/styled": "10.0.10",
+    "@reach/dialog": "0.2.8",
+    "@reach/skip-nav": "0.1.3",
+    "@reach/tabs": "0.1.5",
     "apollo-boost": "0.3.1",
     "color": "3.1.1",
     "emotion-theming": "10.0.10",
@@ -32,7 +35,7 @@
     "isomorphic-unfetch": "3.0.0",
     "next": "8.0.4",
     "react": "16.8.6",
-    "react-apollo-hooks": "0.4.5",
+    "react-apollo-hooks": "0.5.0-alpha.0",
     "react-dom": "16.8.6",
     "sanitize.css": "8.0.0",
     "what-input": "5.2.1"
